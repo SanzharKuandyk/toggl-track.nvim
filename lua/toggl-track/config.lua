@@ -12,6 +12,9 @@ M.options = {
 
 	--- Whether to show notifications in Neovim
 	notify = true,
+
+	--- Picker UI: "native" (vim.ui.select) or "telescope"
+	picker = "native",
 }
 
 --- Apply user-provided options (shallow merge).

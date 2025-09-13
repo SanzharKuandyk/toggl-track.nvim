@@ -35,6 +35,51 @@ function M.bootstrap(cb)
 	end)
 end
 
+--- Switch current workspace by ID (and reload projects)
+--- @param workspace_id integer
+--- @param cb fun(workspace: table|nil, err: string|nil)
+function M.use_workspace(workspace_id, cb)
+	local ws = nil
+	for _, w in ipairs(state.workspaces or {}) do
+		if w.id == workspace_id then
+			state.current_workspace = w
+			ws = w
+		end
+	end
+	if not ws then
+		cb(nil, "Workspace not found: " .. tostring(workspace_id))
+		return
+	end
+
+	-- reload projects for this workspace
+	http.request("GET", "/workspaces/" .. ws.id .. "/projects", nil, function(projects, err)
+		if err then
+			cb(nil, err)
+			return
+		end
+		state.projects = projects or {}
+		cb(ws, nil)
+	end)
+end
+
+--- Switch current project by ID
+--- @param project_id integer
+--- @param cb fun(project: table|nil, err: string|nil)
+function M.use_project(project_id, cb)
+	local project = nil
+	for _, p in ipairs(state.projects or {}) do
+		if p.id == project_id then
+			state.current_project = p
+			project = p
+		end
+	end
+	if not project then
+		cb(nil, "Project not found: " .. tostring(project_id))
+	else
+		cb(project, nil)
+	end
+end
+
 --- Start a timer.
 function M.start_timer(desc, project_id, tags, cb)
 	local start_fn = function()
@@ -118,6 +163,27 @@ function M.get_current(cb)
 			current.project_name = pname or ("#" .. tostring(current.project_id or "?"))
 
 			cb(current, nil)
+		end)
+	end
+
+	if state.current_workspace then
+		fetch_fn()
+	else
+		M.bootstrap(fetch_fn)
+	end
+end
+
+--- List recent time entries (default: last 10)
+--- @param limit integer|nil number of entries
+--- @param cb fun(entries: table|nil, err: string|nil)
+function M.list_entries(limit, cb)
+	local fetch_fn = function()
+		http.request("GET", string.format("/me/time_entries?per_page=%d", limit or 10), nil, function(entries, err)
+			if err then
+				cb(nil, err)
+				return
+			end
+			cb(entries, nil)
 		end)
 	end
 

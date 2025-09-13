@@ -11,7 +11,9 @@ ______________________________________________________________________
 
 - Start / stop Toggl timers from Neovim (async, non-blocking).
 - Auto-discover workspaces and projects (configurable).
-- Keeps minimal runtime state (workspace, project, current entry).
+- Switch between workspaces or projects interactively.
+- Optional Telescope integration for nicer pickers.
+- Minimal runtime state (workspace, project, current entry).
 - Built-in commands for quick usage.
 - Uses `plenary.curl` so Neovim never blocks on requests.
 
@@ -26,25 +28,49 @@ ______________________________________________________________________
 
 ## 🔧 Installation
 
-### lazy.nvim
+Using **lazy.nvim**:
 
 ```lua
-    {
-        "sanzharkuandyk/toggl-track.nvim",
-        config = function()
-            require("toggl-track").setup({
-                api_token = env.TOGGL_API_TOKEN -- api token from toggl,
-            })
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
+{
+  "sanzharkuandyk/toggl-track.nvim",
+  config = function()
+    require("toggl-track").setup({
+      api_token = os.getenv("TOGGL_API_TOKEN"), -- your Toggl API token
+    })
+  end,
+  dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+}
 ```
 
-## 🛠️ ommands
+______________________________________________________________________
+
+## ⚙️ Configuration
 
 ```lua
-:TogglStart "My Project"
-:TogglCurrent
-:TogglStop
-:TogglProjects
+require("toggl-track").setup({
+  api_token = nil,         -- your Toggl API token (required)
+  auto_bootstrap = true,   -- fetch workspace + projects on startup
+  default_desc = "nvim task", -- description if none given
+  notify = true,           -- show notifications
+  picker = "native",       -- "native" or "telescope"
+})
 ```
+
+______________________________________________________________________
+
+## 🛠️ Commands
+
+| Command | Description |
+| -------------------- | -------------------------------------------------- |
+| `:TogglStart [desc]` | Start timer with optional description/project |
+| `:TogglStop` | Stop the current timer |
+| `:TogglCurrent` | Show info about the current timer |
+| `:TogglProjects` | Select project and start timer |
+| `:TogglWorkspaces` | Select workspace (and reload projects) |
+| `:TogglPomodoro` | Start a 25m Pomodoro cycle (auto-stops + notifies) |
+
+______________________________________________________________________
+
+## 🤝 Contributing
+
+This plugin is very early-stage. If you find bugs, want to improve docs or add features — PRs and issues are welcome.

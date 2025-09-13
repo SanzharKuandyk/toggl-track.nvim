@@ -1,0 +1,15 @@
+:TogglCurrent	toggl-track.txt	/*:TogglCurrent*
+:TogglEntries	toggl-track.txt	/*:TogglEntries*
+:TogglProjects	toggl-track.txt	/*:TogglProjects*
+:TogglStart	toggl-track.txt	/*:TogglStart*
+:TogglStop	toggl-track.txt	/*:TogglStop*
+:TogglWorkspaces	toggl-track.txt	/*:TogglWorkspaces*
+toggl-track.nvim	toggl-track.txt	/*toggl-track.nvim*
+toggl-track.nvim-commands	toggl-track.txt	/*toggl-track.nvim-commands*
+toggl-track.nvim-config	toggl-track.txt	/*toggl-track.nvim-config*
+toggl-track.nvim-dev	toggl-track.txt	/*toggl-track.nvim-dev*
+toggl-track.nvim-install	toggl-track.txt	/*toggl-track.nvim-install*
+toggl-track.nvim-intro	toggl-track.txt	/*toggl-track.nvim-intro*
+toggl-track.nvim-reqs	toggl-track.txt	/*toggl-track.nvim-reqs*
+toggl-track.nvim-roadmap	toggl-track.txt	/*toggl-track.nvim-roadmap*
+toggl-track.nvim.txt	toggl-track.txt	/*toggl-track.nvim.txt*

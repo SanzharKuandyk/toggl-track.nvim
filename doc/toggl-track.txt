@@ -1,0 +1,85 @@
+*toggl-track.nvim.txt*      A Toggl Track plugin for Neovim        *toggl-track.nvim*
+
+==============================================================================
+INTRODUCTION                                                *toggl-track.nvim-intro*
+
+`toggl-track.nvim` is an early-stage plugin to start and stop
+[Toggl Track](https://track.toggl.com) timers directly inside Neovim.
+
+Timers are created asynchronously via the Toggl API using |plenary.nvim|.
+Workspaces, projects, and tags are auto-discovered on demand.
+
+> ⚠️ Status: experimental, incomplete, lazy development.
+
+==============================================================================
+REQUIREMENTS                                                *toggl-track.nvim-reqs*
+
+- Neovim >= 0.7
+- |plenary.nvim|
+- (Optional) |telescope.nvim|
+
+==============================================================================
+INSTALLATION                                                *toggl-track.nvim-install*
+
+Using lazy.nvim:
+
+>lua
+    {
+      "sanzharkuandyk/toggl-track.nvim",
+      config = function()
+        require("toggl-track").setup({
+          api_token = os.getenv("TOGGL_API_TOKEN"),
+        })
+      end,
+      dependencies = { "nvim-lua/plenary.nvim" },
+    }
+
+==============================================================================
+CONFIGURATION                                               *toggl-track.nvim-config*
+
+>lua
+    require("toggl-track").setup({
+      api_token = nil,            -- Toggl API token (required)
+      auto_bootstrap = true,      -- fetch workspace + projects on startup
+      default_desc = "nvim task", -- description if none given
+      notify = true,              -- show notifications
+      picker = "native",          -- "native" or "telescope"
+    })
+
+==============================================================================
+COMMANDS                                                    *toggl-track.nvim-commands*
+
+:TogglStart [desc]                                *:TogglStart*
+    Start a timer with optional description or project name.
+
+:TogglStop                                        *:TogglStop*
+    Stop the current timer.
+
+:TogglCurrent                                     *:TogglCurrent*
+    Show info about the current timer.
+
+:TogglProjects                                    *:TogglProjects*
+    Select a project interactively (Telescope or |inputlist()|).
+
+:TogglWorkspaces                                  *:TogglWorkspaces*
+    Select a workspace and reload its projects.
+
+:TogglEntries [N]                                 *:TogglEntries*
+    List recent time entries (default: 10).
+
+==============================================================================
+ROADMAP                                                     *toggl-track.nvim-roadmap*
+
+- Statusline / winbar integration
+- Resume last stopped entry
+
+==============================================================================
+AUTHOR & CONTRIBUTING                                       *toggl-track.nvim-dev*
+
+Author: Sanzhar Kuandyk  
+Repo: https://github.com/sanzharkuandyk/toggl-track.nvim
+
+Contributions, issues and PRs are welcome.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
