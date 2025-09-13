@@ -67,7 +67,6 @@ ______________________________________________________________________
 | `:TogglCurrent` | Show info about the current timer |
 | `:TogglProjects` | Select project and start timer |
 | `:TogglWorkspaces` | Select workspace (and reload projects) |
-| `:TogglPomodoro` | Start a 25m Pomodoro cycle (auto-stops + notifies) |
 
 ______________________________________________________________________
 
