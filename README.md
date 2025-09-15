@@ -73,3 +73,9 @@ ______________________________________________________________________
 ## 🤝 Contributing
 
 This plugin is very early-stage. If you find bugs, want to improve docs or add features — PRs and issues are welcome.
+
+______________________________________________________________________
+
+## 🔍 Alternatives & Acknowledgements
+
+- **[toggl.nvim](https://github.com/williambdean/toggl.nvim)** — another Neovim plugin offering Toggl integration.
