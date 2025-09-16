@@ -36,6 +36,7 @@ Using **lazy.nvim**:
   config = function()
     require("toggl-track").setup({
       api_token = os.getenv("TOGGL_API_TOKEN"), -- your Toggl API token
+      picker = "telescope", -- or "native"
     })
   end,
   dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
