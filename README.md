@@ -9,13 +9,9 @@ ______________________________________________________________________
 
 ## ✨ Features
 
-- Start / stop Toggl timers from Neovim (async, non-blocking).
-- Auto-discover workspaces and projects (configurable).
-- Switch between workspaces or projects interactively.
+- Pure Lua implementation.
 - Optional Telescope integration for nicer pickers.
 - Minimal runtime state (workspace, project, current entry).
-- Built-in commands for quick usage.
-- Uses `plenary.curl` so Neovim never blocks on requests.
 
 ______________________________________________________________________
 
