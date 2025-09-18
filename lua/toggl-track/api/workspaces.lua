@@ -30,6 +30,19 @@ function M.bootstrap(cb)
 	end)
 end
 
+--- Reload all state (workspaces, current workspace, projects)
+--- @param cb fun():nil
+function M.reload(cb)
+	M.bootstrap(function()
+		if config.options.notify then
+			vim.notify("Toggl state reloaded")
+		end
+		if cb then
+			cb()
+		end
+	end)
+end
+
 --- Switch current workspace
 function M.use_workspace(workspace_id, cb)
 	local ws

@@ -47,6 +47,19 @@ function M.register()
 	end, {})
 
 	--------------------------------------------------------------------
+	-- Reload workspace & projects
+	--------------------------------------------------------------------
+	vim.api.nvim_create_user_command("TogglReload", function()
+		api.workspaces.bootstrap(function(_, err)
+			if err then
+				vim.notify("Failed to reload: " .. err, vim.log.levels.ERROR)
+			else
+				vim.notify("Reloaded workspaces and projects")
+			end
+		end)
+	end, {})
+
+	--------------------------------------------------------------------
 	-- Projects
 	--------------------------------------------------------------------
 	vim.api.nvim_create_user_command("TogglProjects", function()
@@ -171,6 +184,26 @@ function M.register()
 			else
 				vim.notify("No active timer")
 			end
+		end)
+	end, {})
+
+	--------------------------------------------------------------------
+	-- Resume last stopped entry
+	--------------------------------------------------------------------
+	vim.api.nvim_create_user_command("TogglResume", function()
+		api.entries.last(function(last, err)
+			if err or not last or not last.id then
+				vim.notify("No previous entry to resume", vim.log.levels.WARN)
+				return
+			end
+
+			api.entries.resume(last, function(res, err2)
+				if res and res.id then
+					vim.notify("Resumed entry: " .. (res.description or ""))
+				elseif err2 then
+					vim.notify("Failed to resume: " .. err2, vim.log.levels.ERROR)
+				end
+			end)
 		end)
 	end, {})
 
